@@ -58,7 +58,8 @@ This time, the access control logic will kick in and deny the request. The -i fl
 
 ```bash
 curl -i 'http://127.0.0.1:8080/secure/grades?studentid=20223949&subjectid=1293'
-Expected Output:
+
+# Expected Output:
 # You will see a 403 Forbidden status and the access denied message.
 
 # HTTP/1.1 403 Forbidden
@@ -86,3 +87,5 @@ curl -i -X PATCH 'http://127.0.0.1:8080/secure/grades' \
 
 # Access Denied: You are not authorized to update grades.
 ```
+
+__This demo clearly illustrates the vulnerability and confirms that the server-side authorization checks effectively mitigate it.__
