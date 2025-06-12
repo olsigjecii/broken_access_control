@@ -89,3 +89,10 @@ curl -i -X PATCH 'http://127.0.0.1:8080/secure/grades' \
 ```
 
 __This demo clearly illustrates the vulnerability and confirms that the server-side authorization checks effectively mitigate it.__
+
+## Run Client (enumerate)
+
+```bash
+# This command specifically runs the 'client' binary
+cargo run --bin client
+```

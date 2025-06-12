@@ -25,7 +25,7 @@ async fn main() -> std::io::Result<()> {
     // we are using Actix-web for this example
     HttpServer::new(move || {
         App::new()
-            .app_data(web::Data::new(db.clone())) // Share the db with handlers
+            .app_data(web::Data::new(db.clone()))
             .service(get_grade)
             .service(update_grade)
             .service(secure_get_grade)
@@ -67,8 +67,6 @@ struct CurrentUser {
     role: String, // "student" or "teacher"
 }
 
-// Handler for GET /grades - VULNERABLE
-// we are using Actix-web for this example
 #[get("/grades")]
 async fn get_grade(db: web::Data<Db>, query: web::Query<GradeLookup>) -> impl Responder {
     let grade_key = format!("{}-{}", query.studentid, query.subjectid);
@@ -82,8 +80,6 @@ async fn get_grade(db: web::Data<Db>, query: web::Query<GradeLookup>) -> impl Re
     }
 }
 
-// Handler for PATCH /grades - VULNERABLE
-// we are using Actix-web for this example
 #[patch("/grades")]
 async fn update_grade(db: web::Data<Db>, payload: web::Json<GradeUpdate>) -> impl Responder {
     let grade_key = format!("{}-{}", payload.studentid, payload.subjectid);
@@ -99,7 +95,7 @@ async fn update_grade(db: web::Data<Db>, payload: web::Json<GradeUpdate>) -> imp
 }
 
 // SECURED handler for GET /grades
-#[get("/secure/grades")] // Using a new path to differentiate
+#[get("/secure/grades")]
 async fn secure_get_grade(db: web::Data<Db>, query: web::Query<GradeLookup>) -> impl Responder {
     let current_user = get_current_user_from_request();
 
@@ -119,8 +115,7 @@ async fn secure_get_grade(db: web::Data<Db>, query: web::Query<GradeLookup>) -> 
     }
 }
 
-// SECURED handler for PATCH /grades
-#[patch("/secure/grades")] // Using a new path to differentiate
+#[patch("/secure/grades")]
 async fn secure_update_grade(db: web::Data<Db>, payload: web::Json<GradeUpdate>) -> impl Responder {
     let current_user = get_current_user_from_request();
 
