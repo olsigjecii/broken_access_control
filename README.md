@@ -1,5 +1,4 @@
-
-# Broken Access Control
+# Broken Access Control in Rust 🦀
 
 ## Step 1: Run the Server
 
@@ -18,7 +17,6 @@ Secure endpoints: /secure/grades
 ## Step 2 : Demo the Attack on Vulnerable Endpoints
 
 Open a new terminal window to perform the following tests.
-
 
 ```bash
 # 1. View another student's grade (IDOR Attack)
@@ -54,7 +52,7 @@ curl 'http://127.0.0.1:8080/grades?studentid=20223948&subjectid=1293'
 Now, run the same attacks against the /secure endpoints to show how the fixes work.
 
 1. Attempt to view another student's grade (Blocked)
-This time, the access control logic will kick in and deny the request. The -i flag is added to show the HTTP status code.
+   This time, the access control logic will kick in and deny the request. The -i flag is added to show the HTTP status code.
 
 ```bash
 curl -i 'http://127.0.0.1:8080/secure/grades?studentid=20223949&subjectid=1293'
@@ -88,8 +86,7 @@ curl -i -X PATCH 'http://127.0.0.1:8080/secure/grades' \
 # Access Denied: You are not authorized to update grades.
 ```
 
-__This demo clearly illustrates the vulnerability and confirms that the server-side authorization checks effectively mitigate it.__
-
+**This demo clearly illustrates the vulnerability and confirms that the server-side authorization checks effectively mitigate it.**
 
 ## Run Client (enumerate)
 
